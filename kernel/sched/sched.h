@@ -34,6 +34,7 @@ extern void update_cpu_load_active(struct rq *this_rq);
 static inline void update_cpu_load_active(struct rq *this_rq) { }
 #endif
 
+extern unsigned int sysctl_sched_ravg_window;
 /*
  * Helpers for converting nanosecond timing to jiffy resolution
  */
