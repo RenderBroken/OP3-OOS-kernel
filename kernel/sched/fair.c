@@ -9815,7 +9815,7 @@ static inline int _nohz_kick_needed_hmp(struct rq *rq, int cpu, int *type)
 	if (rq->nr_running < 2)
 		return 0;
 
-	if (!sysctl_sched_restrict_cluster_spill)
+	if (!sysctl_sched_restrict_cluster_spill || sched_boost())
 		return 1;
 
 	if (cpu_max_power_cost(cpu) == max_power_cost)
