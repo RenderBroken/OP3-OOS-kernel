@@ -80,7 +80,7 @@
 #define MAX_REG_READ_RETRIES 10
 
 unsigned int msienable = 0;
-module_param(msienable, int, 0644);
+module_param(msienable, int, S_IRUSR | S_IRGRP | S_IROTH);
 
 int hif_pci_configure(struct hif_pci_softc *sc, hif_handle_t *hif_hdl);
 void hif_nointrs(struct hif_pci_softc *sc);
@@ -134,8 +134,14 @@ static struct pci_device_id hif_pci_id_table[] = {
 /* HIF IRQ History */
 typedef enum {
 	HIF_IRQ,
+	HIF_IRQ_END,
 	HIF_TASKLET,
+	HIF_TASKLET_END,
 	HIF_CRASH,
+	HIF_SUSPEND_START,
+	HIF_SUSPEND_AFTER_WOW,
+	HIF_SUSPEND_END,
+	HIF_RESUME,
 } hif_irq_type;
 
 #ifdef CONFIG_SLUB_DEBUG_ON
@@ -144,6 +150,9 @@ typedef struct {
 	A_UINT64 time;
 	A_UINT32 irq_summary;
 	A_UINT32 fw_indicator;
+	A_UINT32 irq_enable;
+	A_UINT32 irq_cause;
+	A_UINT32 irq_clear;
 } hif_irq_history;
 
 #define HIF_IRQ_HISTORY_MAX 1024
@@ -168,6 +177,16 @@ void hif_irq_record(hif_irq_type type, struct hif_pci_softc *sc)
 			CE_INTERRUPT_SUMMARY(targid);
 	hif_irq_history_buffer[g_hif_irq_history_idx].fw_indicator =
 			A_TARGET_READ(targid, hif_state->fw_indicator_address);
+	hif_irq_history_buffer[g_hif_irq_history_idx].irq_enable =
+			A_PCI_READ32(sc->mem + SOC_CORE_BASE_ADDRESS +
+				PCIE_INTR_ENABLE_ADDRESS);
+	hif_irq_history_buffer[g_hif_irq_history_idx].irq_cause =
+			A_PCI_READ32(sc->mem + SOC_CORE_BASE_ADDRESS +
+				PCIE_INTR_CAUSE_ADDRESS);
+	hif_irq_history_buffer[g_hif_irq_history_idx].irq_clear =
+			A_PCI_READ32(sc->mem + SOC_CORE_BASE_ADDRESS +
+				PCIE_INTR_CLR_ADDRESS);
+
 	HIFTargetSleepStateAdjust(hif_state->targid, TRUE, FALSE);
 
 out:
@@ -245,6 +264,7 @@ hif_pci_interrupt_handler(int irq, void *arg)
     tasklet_schedule(&sc->intr_tq);
 
     if (sc->hif_init_done == TRUE) {
+        hif_irq_record(HIF_IRQ_END, sc);
         adf_os_spin_unlock_irqrestore(&hif_state->suspend_lock);
     }
     return IRQ_HANDLED;
@@ -822,8 +842,10 @@ irq_handled:
         }
     }
 
-    if (hif_init_done == TRUE)
+    if (hif_init_done == TRUE) {
+        hif_irq_record(HIF_TASKLET_END, sc);
         adf_os_spin_unlock_irqrestore(&hif_state->suspend_lock);
+    }
 
     adf_os_atomic_set(&sc->ce_suspend, 1);
 }
@@ -2560,6 +2582,8 @@ __hif_pci_suspend(struct pci_dev *pdev, pm_message_t state, bool runtime_pm)
     u32 tmp;
     int ret = -EBUSY;
 
+    hif_irq_record(HIF_SUSPEND_START, sc);
+
     if (vos_is_logp_in_progress(VOS_MODULE_ID_HIF, NULL))
         return ret;
 
@@ -2619,6 +2643,8 @@ __hif_pci_suspend(struct pci_dev *pdev, pm_message_t state, bool runtime_pm)
         msleep(10);
     }
 
+    hif_irq_record(HIF_SUSPEND_AFTER_WOW, sc);
+
 #ifdef FEATURE_WLAN_D0WOW
     if (wma_get_client_count(temp_module)) {
         if (enable_irq_wake(pdev->irq)) {
@@ -2649,6 +2675,8 @@ __hif_pci_suspend(struct pci_dev *pdev, pm_message_t state, bool runtime_pm)
          printk(KERN_ERR "%s: PCIe pcie link is down\n", __func__);
          VOS_ASSERT(0);
     }
+
+    hif_irq_record(HIF_SUSPEND_END, sc);
 
     if (HIFTargetSleepStateAdjust(targid, TRUE, FALSE) < 0) {
         adf_os_spin_unlock_irqrestore(&hif_state->suspend_lock);
@@ -2751,6 +2779,9 @@ __hif_pci_resume(struct pci_dev *pdev, bool runtime_pm)
         A_MDELAY(1);
         retry++;
     }
+
+    hif_irq_record(HIF_RESUME, sc);
+
     if (HIFTargetSleepStateAdjust(targid, TRUE, FALSE) < 0)
         goto out;
 
