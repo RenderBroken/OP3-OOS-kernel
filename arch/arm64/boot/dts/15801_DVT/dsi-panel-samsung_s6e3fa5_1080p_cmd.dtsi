@@ -93,6 +93,7 @@
 		/*qcom,mdss-dsi-panel-inverted;*/
 		qcom,mdss-pan-physical-width-dimension = <68>;
 		qcom,mdss-pan-physical-height-dimension = <122>;
+		qcom,ulps-enabled;
 		qcom,mdss-tear-check-frame-rate=<6000>;
 		//qcom,mdss-tear-check-sync-cfg-height = <1932>; /* Height + VBP + VFP + VSW */
 		//qcom,mdss-tear-check-sync-init-val= <1920>; /* Height */
