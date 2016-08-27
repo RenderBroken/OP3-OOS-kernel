@@ -80,5 +80,6 @@ obj-y  += type-c_notifier.o
 
 obj-$(CONFIG_QPNP_MISC) 	+= qpnp-misc.o
 obj-$(CONFIG_GPIO_SWITCH)	+= gpio_switch.o
+obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
 #add by xcb
 obj-$(CONFIG_BOOTLOADER_LOG)	+= bootloader_log.o
