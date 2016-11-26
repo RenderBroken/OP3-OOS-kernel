@@ -274,8 +274,7 @@ int wlan_log_to_user(VOS_TRACE_LEVEL log_level, char *to_be_sent, int length)
 	uint64_t ts;
 	uint32_t rem;
 
-	if ((!vos_is_multicast_logging()) ||
-              (!gwlan_logging.is_active)) {
+	if (!vos_is_multicast_logging()) {
 		/*
 		 * This is to make sure that we print the logs to kmsg console
 		 * when no logger app is running. This is also needed to

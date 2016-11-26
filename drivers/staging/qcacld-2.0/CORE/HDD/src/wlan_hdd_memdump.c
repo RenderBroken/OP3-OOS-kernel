@@ -601,7 +601,6 @@ int memdump_init(void)
 	}
 
 	mutex_init(&hdd_ctx->memdump_lock);
-	hdd_ctx->memdump_init_done = true;
 
 	return 0;
 }
@@ -638,12 +637,6 @@ void memdump_deinit(void) {
 		return;
 	}
 
-	if (!hdd_ctx->memdump_init_done) {
-		hddLog(LOGE, FL("MemDump not initialized"));
-		return;
-	}
-
-	hdd_ctx->memdump_init_done = false;
 	adf_ctx = vos_get_context(VOS_MODULE_ID_ADF, hdd_ctx->pvosContext);
 	if (!adf_ctx) {
 		hddLog(LOGE, FL("ADF context is NULL"));
@@ -661,9 +654,7 @@ void memdump_deinit(void) {
 		hdd_ctx->fw_dump_loc = NULL;
 		hdd_ctx->memdump_in_progress = false;
 	}
-
 	mutex_unlock(&hdd_ctx->memdump_lock);
-	mutex_destroy(&hdd_ctx->memdump_lock);
 
 	if (VOS_TIMER_STATE_RUNNING ==
 	  vos_timer_getCurrentState(&hdd_ctx->memdump_cleanup_timer)) {

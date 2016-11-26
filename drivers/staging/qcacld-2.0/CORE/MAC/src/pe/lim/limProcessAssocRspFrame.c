@@ -520,7 +520,6 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
         "and setting NULL"));
         vos_mem_free(psessionEntry->assocRsp);
         psessionEntry->assocRsp = NULL;
-        psessionEntry->assocRspLen = 0;
     }
 
     psessionEntry->assocRsp = vos_mem_malloc(frameLen);
@@ -540,7 +539,6 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     {
         vos_mem_free(psessionEntry->ricData);
         psessionEntry->ricData = NULL;
-        psessionEntry->RICDataLen = 0;
     }
     if(pAssocRsp->ricPresent) {
         psessionEntry->RICDataLen =
@@ -586,7 +584,6 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     {
         vos_mem_free(psessionEntry->tspecIes);
         psessionEntry->tspecIes = NULL;
-        psessionEntry->tspecLen = 0;
     }
     if(pAssocRsp->tspecPresent) {
         limLog(pMac, LOG1, FL("Tspec EID present in assoc rsp"));

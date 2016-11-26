@@ -293,7 +293,7 @@ __HIFReadWrite(HIF_DEVICE *device,
 {
     A_UINT8 opcode;
     A_STATUS    status = A_OK;
-    int ret = 0;
+    int     ret;
     A_UINT8 *tbuffer;
     A_BOOL   bounced = FALSE;
 

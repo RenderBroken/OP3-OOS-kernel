@@ -1543,9 +1543,6 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
     v_U32_t ieLen = 0;
     tSirProbeRespBeacon *pBeaconStruct;
     tpAniSirGlobal  pMac = (tpAniSirGlobal) halHandle;
-    tSapSpectChInfo *pSpectChStartAddr = pSpectInfoParams->pSpectCh;
-    tSapSpectChInfo *pSpectChEndAddr =
-                    pSpectInfoParams->pSpectCh + pSpectInfoParams->numSpectChans;
 
     pBeaconStruct = vos_mem_malloc(sizeof(tSirProbeRespBeacon));
     if ( NULL == pBeaconStruct )
@@ -1629,9 +1626,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                 tSapSpectChInfo *pExtSpectCh = NULL;
                                 case PHY_DOUBLE_CHANNEL_LOW_PRIMARY: // Above the Primary Channel
                                     pExtSpectCh = (pSpectCh + 1);
-                                    if( pExtSpectCh != NULL &&
-                                       (pExtSpectCh >= pSpectChStartAddr &&
-                                        pExtSpectCh <= pSpectChEndAddr))
+                                    if(pExtSpectCh != NULL)
                                     {
                                         ++pExtSpectCh->bssCount;
                                         rssi = pSpectCh->rssiAgr + SAP_SUBBAND1_RSSI_EFFECT_PRIMARY;
@@ -1647,9 +1642,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
 
                                 case PHY_DOUBLE_CHANNEL_HIGH_PRIMARY: // Below the Primary channel
                                     pExtSpectCh = (pSpectCh - 1);
-                                    if( pExtSpectCh != NULL &&
-                                       (pExtSpectCh >= pSpectChStartAddr &&
-                                        pExtSpectCh <= pSpectChEndAddr))
+                                    if(pExtSpectCh != NULL)
                                     {
                                         rssi = pSpectCh->rssiAgr + SAP_SUBBAND1_RSSI_EFFECT_PRIMARY;
                                         if (IS_RSSI_VALID(pExtSpectCh->rssiAgr, rssi))
@@ -1668,9 +1661,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                             {
                                 tSapSpectChInfo *pExtSpectCh = NULL;
                                 pExtSpectCh = (pSpectCh + 1);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND1_RSSI_EFFECT_PRIMARY;
@@ -1682,9 +1673,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                         pExtSpectCh->rssiAgr = SOFTAP_MIN_RSSI;
                                 }
                                 pExtSpectCh = (pSpectCh + 2);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND2_RSSI_EFFECT_PRIMARY;
@@ -1696,9 +1685,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                         pExtSpectCh->rssiAgr = SOFTAP_MIN_RSSI;
                                 }
                                 pExtSpectCh = (pSpectCh + 3);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND3_RSSI_EFFECT_PRIMARY;
@@ -1714,9 +1701,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                             {
                                 tSapSpectChInfo *pExtSpectCh = NULL;
                                 pExtSpectCh = (pSpectCh - 1 );
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND1_RSSI_EFFECT_PRIMARY;
@@ -1728,9 +1713,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                         pExtSpectCh->rssiAgr = SOFTAP_MIN_RSSI;
                                 }
                                 pExtSpectCh = (pSpectCh + 1);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND1_RSSI_EFFECT_PRIMARY;
@@ -1742,9 +1725,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                         pExtSpectCh->rssiAgr = SOFTAP_MIN_RSSI;
                                 }
                                 pExtSpectCh = (pSpectCh + 2);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND2_RSSI_EFFECT_PRIMARY;
@@ -1760,9 +1741,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                             {
                                 tSapSpectChInfo *pExtSpectCh = NULL;
                                 pExtSpectCh = (pSpectCh - 1 );
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND1_RSSI_EFFECT_PRIMARY;
@@ -1774,9 +1753,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                         pExtSpectCh->rssiAgr = SOFTAP_MIN_RSSI;
                                 }
                                 pExtSpectCh = (pSpectCh - 2);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND2_RSSI_EFFECT_PRIMARY;
@@ -1788,9 +1765,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                         pExtSpectCh->rssiAgr = SOFTAP_MIN_RSSI;
                                 }
                                 pExtSpectCh = (pSpectCh + 1);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND1_RSSI_EFFECT_PRIMARY;
@@ -1806,9 +1781,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                             {
                                 tSapSpectChInfo *pExtSpectCh = NULL;
                                 pExtSpectCh = (pSpectCh - 1 );
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND1_RSSI_EFFECT_PRIMARY;
@@ -1820,9 +1793,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                         pExtSpectCh->rssiAgr = SOFTAP_MIN_RSSI;
                                 }
                                 pExtSpectCh = (pSpectCh - 2);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND2_RSSI_EFFECT_PRIMARY;
@@ -1834,9 +1805,7 @@ void sapComputeSpectWeight( tSapChSelSpectInfo* pSpectInfoParams,
                                         pExtSpectCh->rssiAgr = SOFTAP_MIN_RSSI;
                                 }
                                 pExtSpectCh = (pSpectCh - 3);
-                                if( pExtSpectCh != NULL &&
-                                   (pExtSpectCh >= pSpectChStartAddr &&
-                                    pExtSpectCh <= pSpectChEndAddr))
+                                if(pExtSpectCh != NULL)
                                 {
                                     ++pExtSpectCh->bssCount;
                                     rssi = pSpectCh->rssiAgr + SAP_SUBBAND3_RSSI_EFFECT_PRIMARY;
@@ -2324,9 +2293,9 @@ void sapSortChlWeightAll(ptSapContext pSapCtx,
 
 #else
     /* Sorting the channels as per weights */
-    for (i = 0; i < pSpectInfoParams->numSpectChans; i++) {
+    for (i = 0; i < SPECT_24GHZ_CH_COUNT; i++) {
         minWeightIndex = i;
-        for( j = i + 1; j < pSpectInfoParams->numSpectChans; j++) {
+        for( j = i + 1; j < SPECT_24GHZ_CH_COUNT; j++) {
             if(pSpectCh[j].weight < pSpectCh[minWeightIndex].weight) {
                 minWeightIndex = j;
             }

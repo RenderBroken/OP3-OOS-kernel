@@ -1352,37 +1352,32 @@ void limSendHalOemDataReq(tpAniSirGlobal pMac)
     tpStartOemDataReq pStartOemDataReq = NULL;
     tSirRetStatus rc = eSIR_SUCCESS;
     tpLimMlmOemDataRsp pMlmOemDataRsp;
+    tANI_U32 reqLen = 0;
     if(NULL == pMac->lim.gpLimMlmOemDataReq)
     {
         PELOGE(limLog(pMac, LOGE,  FL("Null pointer"));)
         goto error;
     }
 
-    pStartOemDataReq = vos_mem_malloc(sizeof(*pStartOemDataReq));
+    reqLen = sizeof(tStartOemDataReq);
+
+    pStartOemDataReq = vos_mem_malloc(reqLen);
     if ( NULL == pStartOemDataReq )
     {
         PELOGE(limLog(pMac, LOGE,  FL("OEM_DATA: Could not allocate memory for pStartOemDataReq"));)
         goto error;
     }
 
-    pStartOemDataReq->data =
-        vos_mem_malloc(pMac->lim.gpLimMlmOemDataReq->data_len);
-    if (!pStartOemDataReq->data) {
-        limLog(pMac, LOGE, FL("memory allocation failed"));
-        vos_mem_free(pStartOemDataReq);
-        goto error;
-    }
+    vos_mem_set((tANI_U8*)(pStartOemDataReq), reqLen, 0);
 
     //Now copy over the information to the OEM DATA REQ to HAL
     vos_mem_copy(pStartOemDataReq->selfMacAddr,
                  pMac->lim.gpLimMlmOemDataReq->selfMacAddr,
                  sizeof(tSirMacAddr));
 
-    pStartOemDataReq->data_len =
-                 pMac->lim.gpLimMlmOemDataReq->data_len;
-    vos_mem_copy(pStartOemDataReq->data,
-                 pMac->lim.gpLimMlmOemDataReq->data,
-                 pMac->lim.gpLimMlmOemDataReq->data_len);
+    vos_mem_copy(pStartOemDataReq->oemDataReq,
+                 pMac->lim.gpLimMlmOemDataReq->oemDataReq,
+                 OEM_DATA_REQ_SIZE);
 
     //Create the message to be passed to HAL
     msg.type = WDA_START_OEM_DATA_REQ;
@@ -1399,9 +1394,8 @@ void limSendHalOemDataReq(tpAniSirGlobal pMac)
     }
 
     SET_LIM_PROCESS_DEFD_MESGS(pMac, true);
-    vos_mem_free(pStartOemDataReq->data);
     vos_mem_free(pStartOemDataReq);
-    PELOGE(limLog(pMac, LOGE,  FL("OEM_DATA: posting WDA_pStartOemDataReq to HAL failed"));)
+    PELOGE(limLog(pMac, LOGE,  FL("OEM_DATA: posting WDA_START_OEM_DATA_REQ to HAL failed"));)
 
 error:
     pMac->lim.gLimMlmState = pMac->lim.gLimPrevMlmState;
@@ -1416,10 +1410,6 @@ error:
 
     if(NULL != pMac->lim.gpLimMlmOemDataReq)
     {
-        if (NULL != pMac->lim.gpLimMlmOemDataReq->data) {
-            vos_mem_free(pMac->lim.gpLimMlmOemDataReq->data);
-            pMac->lim.gpLimMlmOemDataReq->data = NULL;
-        }
         vos_mem_free(pMac->lim.gpLimMlmOemDataReq);
         pMac->lim.gpLimMlmOemDataReq = NULL;
     }
@@ -1999,7 +1989,6 @@ limProcessMlmScanReq(tpAniSirGlobal pMac, tANI_U32 *pMsgBuf)
 static void limProcessMlmOemDataReq(tpAniSirGlobal pMac, tANI_U32 *pMsgBuf)
 {
     tLimMlmOemDataRsp*     pMlmOemDataRsp;
-    tLimMlmOemDataReq *data_req = (tLimMlmOemDataReq *)pMsgBuf;
 
     if (((pMac->lim.gLimMlmState == eLIM_MLM_IDLE_STATE) ||
          (pMac->lim.gLimMlmState == eLIM_MLM_JOINED_STATE) ||
@@ -2014,16 +2003,12 @@ static void limProcessMlmOemDataReq(tpAniSirGlobal pMac, tANI_U32 *pMsgBuf)
          * second OEM data request
          */
         if (pMac->lim.gpLimMlmOemDataReq) {
-            if (pMac->lim.gpLimMlmOemDataReq->data) {
-                vos_mem_free(pMac->lim.gpLimMlmOemDataReq->data);
-                pMac->lim.gpLimMlmOemDataReq->data = NULL;
-            }
             vos_mem_free(pMac->lim.gpLimMlmOemDataReq);
             pMac->lim.gpLimMlmOemDataReq = NULL;
         }
 
-        pMac->lim.gpLimMlmOemDataReq = data_req;
-        pMac->lim.gpLimMlmOemDataReq->data = data_req->data;
+        pMac->lim.gpLimMlmOemDataReq = (tLimMlmOemDataReq*)pMsgBuf;
+
         pMac->lim.gLimPrevMlmState = pMac->lim.gLimMlmState;
 
         PELOG2(limLog(pMac, LOG2,

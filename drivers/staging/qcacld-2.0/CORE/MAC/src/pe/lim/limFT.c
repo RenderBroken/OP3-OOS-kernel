@@ -1004,19 +1004,9 @@ void limFillFTSession(tpAniSirGlobal pMac,
       pftSessionEntry->htSupportedChannelWidthSet;
 
    pftSessionEntry->enableHtSmps = psessionEntry->enableHtSmps;
-   pftSessionEntry->htSmpsvalue = psessionEntry->htSmpsvalue;
-   /*
-    * By default supported NSS 1x1 is set to true
-    * and later on updated while determining session
-    * supported rates which is the intersection of
-    * self and peer rates
-    */
-   pftSessionEntry->supported_nss_1x1 = true;
-   limLog(pMac, LOG1,
-          FL("FT enable smps: %d mode: %d supported nss 1x1: %d"),
-          pftSessionEntry->enableHtSmps,
-          pftSessionEntry->htSmpsvalue,
-          pftSessionEntry->supported_nss_1x1);
+   pftSessionEntry->smpsMode = psessionEntry->smpsMode;
+   limLog(pMac, LOG1, FL("FT session enable smps: %d mode: %d"),
+          pftSessionEntry->enableHtSmps, pftSessionEntry->smpsMode);
 
    vos_mem_free(pBeaconStruct);
 }
@@ -1273,7 +1263,6 @@ void limHandleFTPreAuthRsp(tpAniSirGlobal pMac, tSirRetStatus status,
       vos_mem_copy(&(pftSessionEntry->htConfig), &(psessionEntry->htConfig),
             sizeof(psessionEntry->htConfig));
       pftSessionEntry->limSmeState = eLIM_SME_WT_REASSOC_STATE;
-      pftSessionEntry->smpsMode = psessionEntry->smpsMode;
 
       PELOGE(limLog(pMac, LOG1, "%s:created session (%p) with id = %d",
                __func__, pftSessionEntry, pftSessionEntry->peSessionId);)
@@ -1440,12 +1429,6 @@ void limProcessMlmFTReassocReq(tpAniSirGlobal pMac, tANI_U32 *pMsgBuf,
         vos_mem_free(pMlmReassocReq);
         goto end;
     }
-
-    lim_update_caps_info_for_bss(pMac, &caps,
-                  psessionEntry->pLimReAssocReq->bssDescription.capabilityInfo);
-
-    limLog(pMac, LOG1, FL("Capabilities info FT Reassoc: 0x%X"), caps);
-
     pMlmReassocReq->capabilityInfo = caps;
 
     /* Update PE sessionId*/
