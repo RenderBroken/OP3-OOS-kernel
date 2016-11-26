@@ -17216,7 +17216,7 @@ disconnected:
      */
     hddLog(LOG1, FL("Send disconnected event to userspace"));
 
-    wlan_hdd_cfg80211_indicate_disconnect(pAdapter->dev, true,
+    wlan_hdd_cfg80211_indicate_disconnect(pAdapter->dev, false,
                                           WLAN_REASON_UNSPECIFIED);
 #endif
 

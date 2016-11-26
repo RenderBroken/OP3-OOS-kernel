@@ -11568,7 +11568,7 @@ VOS_STATUS hdd_start_all_adapters( hdd_context_t *pHddCtx )
                pAdapter->sessionCtx.station.hdd_ReassocScenario = VOS_FALSE;
 
                /* indicate disconnected event to nl80211 */
-               wlan_hdd_cfg80211_indicate_disconnect(pAdapter->dev, false,
+               wlan_hdd_cfg80211_indicate_disconnect(pAdapter->dev, true,
                                                      WLAN_REASON_UNSPECIFIED);
             }
             else if (eConnectionState_Connecting == connState)

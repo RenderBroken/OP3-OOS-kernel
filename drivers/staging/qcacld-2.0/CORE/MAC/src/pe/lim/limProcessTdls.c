@@ -2340,20 +2340,8 @@ static void limTdlsUpdateHashNodeInfo(tpAniSirGlobal pMac, tDphHashNode *pStaDs,
          * base channel should be less than or equal to channel width of
          * STA-AP link. So take this setting from the psessionEntry.
          */
-        limLog(pMac, LOG1,
-               FL("supportedChannelWidthSet %x htSupportedChannelWidthSet %x"),
-               htCaps->supportedChannelWidthSet,
-               psessionEntry->htSupportedChannelWidthSet);
-
         pStaDs->htSupportedChannelWidthSet =
-            (htCaps->supportedChannelWidthSet <
-              psessionEntry->htSupportedChannelWidthSet) ?
-                 htCaps->supportedChannelWidthSet :
-                 psessionEntry->htSupportedChannelWidthSet;
-
-        limLog(pMac, LOG1, FL("pStaDs->htSupportedChannelWidthSet %x"),
-               pStaDs->htSupportedChannelWidthSet);
-
+            psessionEntry->htSupportedChannelWidthSet;
         pStaDs->htMIMOPSState = htCaps->mimoPowerSave ;
         pStaDs->htMaxAmsduLength =  htCaps->maximalAMSDUsize;
         pStaDs->htAMpduDensity =    htCaps->mpduDensity;
