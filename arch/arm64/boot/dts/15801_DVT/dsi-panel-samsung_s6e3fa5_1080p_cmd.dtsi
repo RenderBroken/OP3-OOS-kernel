@@ -97,7 +97,6 @@
 		/*qcom,mdss-dsi-panel-inverted;*/
 		qcom,mdss-pan-physical-width-dimension = <68>;
 		qcom,mdss-pan-physical-height-dimension = <122>;
-		qcom,ulps-enabled;
 		qcom,mdss-tear-check-frame-rate=<6000>;
 		//qcom,mdss-tear-check-sync-cfg-height = <1932>; /* Height + VBP + VFP + VSW */
 		//qcom,mdss-tear-check-sync-init-val= <1920>; /* Height */
@@ -117,5 +116,9 @@
 		qcom,mdss-dsi-panel-hbm-on-command = [15 01 00 00 00 00 02 53 E8];
 		qcom,mdss-dsi-panel-hbm-off-command = [15 01 00 00 00 00 02 53 28];
 		qcom,mdss-dsi-hbm-command-state = "dsi_hs_mode";
+
+		qcom,ulps-enabled;
+		qcom,partial-update-enabled;
+		qcom,panel-roi-alignment = <360 64 360 64 360 64>;
 	};
 };
