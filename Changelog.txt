@@ -1,0 +1,211 @@
+Changelog For Render Kernel!!
+
+R1: 
+a19d440 (HEAD -> rk-oos-m, origin/rk-oos-r1-t13, origin/rk-oos-m, rk-oos-r1-t13) usb: dwc3-msm: Don't issue power supply change for invalid charger
+953a940 USB: dwc3: msm: Kill tasklet before disabling irq in suspend
+c8eef41 arm: dts: 15801: enable MDSS Idle Power Collapse
+0b8cce9 arm: dts: 15801: Avoid L2PC on big cluster CPUs. Picked from https://github.com/myfluxi/android_kernel_oneplus_msm8996/commit/900e66d9aa4cdcd55b3626670303a4235501e1b4
+254eddf UPSTREAM: sched: Improve load balancing in the presence of idle CPUs
+e8c2d79 cfq-iosched: fix the setting of IOPS mode on SSDs
+61b819d input: Disable Synaptics DSX drivers
+71aff93 spi: spi_qsd: Improve latencies for small transfers
+f26d42b2 PM / devfreq: Add a governor white list
+02f7825 arm: dts: 15801: Update MPM bypass list
+65a7337 arm: dts: 15801: disable LP11
+25a5097 arm: dts: 15801: Correct MPP4 behaviour
+8a68142 arm64: lib: memory utilities optimization
+bf97cdc UPSTREAM: arm64: jump labels: NOP out NOP -> NOP replacement
+4a653e9 Defconfig: Update
+bc8cde3 usb: dwc3-msm: define CONFIG_MACH_MSM8996_15801
+efa7483 usb: dwc3-msm: Remove indefinite wakeup
+8849603 gpio_keys: call oem_check_force_dump_key() later
+13d69fa gpio: Mask non-wakeup GPIO interrupts on suspend
+397deef msm: mpm: disable debugging
+84dcef7 Defconfig: CONFIG_RCU_NOCB_CPU=y & CONFIG_RCU_NOCB_CPU_ALL=y
+90638ae9 arm64: dtsi: enable ulps, partial updates and the correct roi alignment from CM
+68bdf6a Makefile: use big.Little a53/a57 flag
+7713922 Synchronize codes to OxygenOS 3.2.8.
+6c45bd9 writeback: increase bdi_min_ratio to 5 in light of the latest writeback commit.
+2c44f15 writeback: fix writeback cache thrashing
+0a6abf7 arm64: lib: improve copy_page to deal with 128 bytes at a time
+f95b72c int_sqrt: Improve 3x faster integer sqrt.
+e4a602f int_sqrt.c: Correction square root algo with naming
+082df3a Defconfig: CONFIG_WQ_POWER_EFFICIENT_DEFAULT=y
+a1ef703 msm: Use interruptible wait to not affect load average
+a34ada3 msm: Use interruptible wait to not affect load average
+a221128 msm: Fix high load average from uninterruptible waits
+bc590f3 sched: Implement lockless wake-queues
+14779e4 qcacld-2.0: Disable Tx delay in FW
+ef05bee qcacld-2.0: CL 1672988 - update fw common interface files
+05d0223 qcacld-2.0: Fix stack corruption issue in sme_RrmProcessNeighborReport
+58d1a3c qcacld-2.0: Fix compile errors when packet-log feature is disabled
+46aa03d qcacld-2.0: Disable packet log feature
+699658d qcacld-2.0: Increase multicast filter count
+aae64a13 qcacld-2.0: silence wakeup event log
+8f0c119 staging: qcacld-2.0: disable log spilling message
+6edb00a Silences WLAN, PCIe, and CPU suspend state kernel messages
+48a69b8 qcacld-2.0: Chillax the spammy logging
+65eeb3a Import qcacld-2.0 opensource LA.HB.1.3.2-32600-8x96.0
+ea303df Revert "Add qcacld-2.0 from LA.HB.1.3.1.c1-06100-8x96.0"
+f108e42 Revert "qcacld-2.0: fix build warnings"
+ba025e0 Revert "qcacld-2.0: Update to LA.HB.1.3.2-15400-8x96.0"
+8e0de0d Revert "qcacld-2.0: Chillax the spammy logging"
+a9dc30d Revert "Silences WLAN, PCIe, and CPU suspend state kernel messages"
+1aed150 Revert "qcacld-2.0: Release LA.HB.1.3.2-16800-8x96.0"
+6714416 Revert "qcacld-2.0: Update to release LA.HB.1.3.2-19000-8x96.0"
+d0c5bfd Revert "qcacld-2.0: Fix IPV6 IPA Rx property setting"
+b21febb Revert "staging: qcacld-2.0: disable log spilling message"
+416f3b3 Revert "qcacld-2.0: silence wakeup event log"
+dc78e10 Revert "qcacld-2.0: Fix set all-zero address mcast filter"
+e210f1d Revert "qcacld-2.0: Increase multicast filter count"
+18ad3f2 Revert "qcacld-2.0: Update to LA.HB.1.3.2-22100-8x96.0"
+7ce12d9 Revert "qcacld-2.0: Disable packet log feature"
+fa52f72 Revert "qcacld-2.0: Fix compile errors when packet-log feature is disabled"
+9b4429f Revert "qcacld-2.0: Fix stack corruption issue in sme_RrmProcessNeighborReport"
+0c04f32 Revert "qcacld-2.0: Discard pktlog message for invalid msdu id"
+38d0ee6 Revert "qcacld-2.0: Dont include ext caps in Assoc request if AP doesn't support"
+7850fc3 PM / devfreq: memlat: Prevent deadlock with hotplug in start_hwmon
+5d902d0 PM / devfreq: bw_hwmon: Fix race condition in polling interval update
+3849764 Defconfig: Update
+b12d8ca Defconfig: Enable SECURITY_PERF_EVENTS_RESTRICT
+da774ce perf: Fix race in swevent hash
+bbb2377 FROMLIST: security,perf: Allow further restriction of perf_event_open
+b32bf39 cgroup: prefer %pK to %p
+203bb5a3 (rk-oos-r1-t12) Defconfig: update
+830b396 net: rmnet_data: Silence "Unkown IOCTL" log spam
+1fe5ffb android: binder: Disable debug messages by default
+a223aff input: synaptics: s3320: Silence log spam
+125a9bbc power: reset: msm: Always perform warm reset
+2895764 sched: Fix cpu_active_mask/cpu_online_mask race
+f78d042 sched: panic on corrupted stack end
+c1afe0a sched: panic on corrupted stack end
+4abd0b2 perf: duplicate deletion of perf event
+0ba141b sched: restrict sync wakee placement bias with waker's demand
+49bbe71 sched: add preference for waker cluster CPU in wakee task placement
+bd7de55 trace: prevent NULL pointer dereference
+f76b3ad ANDROID: binder: Add strong ref checks
+2e01664 ANDROID: binder: Clear binder and cookie when setting handle in flat binder struct
+65486d0 android: binder: Don't use sched_preempt_enable_no_resched.
+70c17f9 android: binder: Use wake up hint for synchronous transactions.
+ce3b8f4 irqchip: Silence log spam
+2c8ae6d defconfig: msm: enable msm_power driver
+1ca51f6 ARM: dts: msm: add msm_power device for msm8996
+5ab5665 soc: qcom: msm_power: add msm_power driver
+7dd2b9e mmc: core: Add deferred resume support to CQ
+a211e85 mmc: Fix pm_notifier obeying deferred resume
+ed92d6a mmc: core: Add deferred bus resume policy.
+ac27649 cpu: Silence log spam
+78562d1 selinux: Android kernel compatibility with M userspace
+fec49fa selinux: extended permissions for ioctls
+5cdcfdc security: add ioctl specific auditing to lsm_audit
+b818fd9 selinux: remove unnecessary pointer reassignment
+6913b1c Revert "security: lsm_audit: add ioctl specific auditing"
+ddb4da2 Revert "SELinux: per-command whitelisting of ioctls"
+969ea1c Revert "SELinux: use deletion-safe iterator to free list"
+7714401 Revert "SELinux: ss: Fix policy write for ioctl operations"
+c819ed5 ARM: dts: 15801: Enable ULPS
+e98edd3 msm: qpnp-haptic: Process haptics asynchronously
+f4d45c3 power: bq27541: Silence log spam
+b197b1b power: bq27541: Don't queue work onto a specific CPU
+22bbd9b kmemleak: Remove weird OEM stuff
+1eb9fcc Defconfig: Enable CONFIG_CPUSETS
+218a748 cpuset: Make cpusets restore on hotplug
+144483a cpuset: Add allow_attach hook for cpusets on android.
+846ddce Defconfig: Disable Core Control Helper
+2ad1bd3 cpufreq: cpu-boost: Remove migration sync boost
+bbe6bf5 Disable Add Random
+4235358 disable crc check
+b9d7b9d Defconfig: CONFIG_SCHED_CORE_CTL=y
+616a27f sched: Add a knob to disable the core_ctl
+c3860c5 trace: Move core control trace events to scheduler
+81335a3 core_ctrl: Move core control into kernel
+e856528 Defconfig: Update
+86a1a53 printk: Fix OEM print wall time logic
+77963fb msm: Fix Kconfig warnings
+7588ea5 Defconfig: Update
+a0c72ef mm: remove gup_flags FOLL_WRITE games from __get_user_pages()
+6b29ea3 kgsl: convert some workqueues to use kthreads
+41d883a mdss: move to a kthread for vsync_retire_work_handler
+64ebdef proc: Remove verifiedbootstate flag from /proc/cmdline
+577758f soc: qcom: Update oneplus project_info for newer firmwares
+041374b sdcardfs: override umask on mkdir and create
+7b734a4 sdcardfs: replace LOOKUP_CASE_INSENSITIVE
+1498b06 sdcardfs: reserve 20MB by default
+2fc2157 sdcardfs: merge version 3.2.0
+6bf52af fs: fix sdcardfs compilation errors
+a1f53f3 fs: import sdcardfs from G930FXXU1APF2
+849f969 Replace %p with %pK to prevent leaking kernel address
+e6cd806 msm: msm_bus: remove the buspm module from kernel
+256c0f5 net: sch_generic: Allow devices to opt-out net watchdog
+db289d1 block: Make CFQ default to IOPS mode on SSDs
+f932fa1 msm_performance: fix big cluster value
+ff90959 msm_performance: Make input boosting optional
+4f4edd7 msm: mdss: KCAL: disable igc update
+8a7dc7d zen-iosched: change fifo_batch to 16
+728ef51 block: add zen scheduler
+5ce34b2 input: synaptics: s3320: Actually set BTN_TOOL_FINGER keybit
+0c12a6a4 leds-qpnp: Notification LED control - V1.1b
+63cb12e leds-qpnp: Notification LED control - V1.1a
+ea45daf input: synaptics: s3320: Don't run baseline on resume
+b71a781 misc: fpc1020: Ignore home key presses when touchscreen is in use
+b53ee2f input: synaptics: s1302: Stop keypad when touchscreen is in use
+9fef2c7 msm: mdss: KCAL: Send a pp display commit when changes are made
+4664441  ASoC: wcd9335: prevent speaker gain from being reset
+de455ff ASoC: wcd9335: add analog headphone gain
+afa5618 ASoC: wcd9335: fix speaker gain controls
+658aa15 ASoC: wcd9335: add mic gain and speaker gain for OnePlus3
+ce00693 ASoC: wcd9335: Sound control
+3de72b1 qpnp-haptic: Dejank the haptics
+c2e766e leds-qpnp: fix torch light and potential other LEDs being affected by notification LED control
+5c48db0 leds-qpnp: Notification LED control - V1.1
+16053c3 leds-qpnp: Notification LED control - V1
+477a83f mdss mdp: kcal for mdss_mdp_v1_7
+22c3b94 otg: enable switch
+0c5875a mdss_fb: add backlight dimmer option
+d04165e platform/msm: haptic: expose vibrate function
+7c00efd msm: qpnp-haptic: disable vibration when vmax_mv_strong is set to min
+102dfeb platform/msm: haptic: add sysfs node for vmax_mv
+b0d85c52 Allow selectable tick rate
+840e51f msm8996: Overclocking frequencies
+ef59f16 binder: prevent kptr leak by using %pK format specifier
+cea1c51 PM: devfreq: Fix simple_ondemand crashing on startup
+6b6dd46 msm: kgsl: Report correct GPU frequency in sysfs
+3f46710 PM: devfreq: Use high priority workqueue
+a7dc0e5 AIO: Don't plug the I/O queue in do_io_submit()
+16ab1c3 block, bfq: add Early Queue Merge (EQM) to BFQ-v7r8 for 3.18.0
+25ab835 block: introduce the BFQ-v7r8 I/O sched for 3.18.0
+079d5cd block: cgroups, kconfig, build bits for BFQ-v7r8-3.18.0
+9c4c22e SIO: update for linux 3.18
+5f37efd FIOPS: update for linux 3.18
+d3d4b1a Add SIO and FIOPS i/o schedulers
+5ec2790 Added fsync on/off support.
+01993f9 mm: slub: Default slub_max_order to 0
+654704c fs: Workaround the compiler's bad optimization
+8b355b6 dm-crypt: run in a WQ_HIGHPRI workqueue
+5ab292a dm-verity: run in a WQ_HIGHPRI workqueue
+9e0a7e7 mmc: move to a SCHED_FIFO thread
+59ce23a binfmt_elf.c: use get_random_int() to fix entropy depleting
+f638bd1 Fix version name
+7f2a17f arch: Unbreak mrproper/clean
+7aba921 arm64: Fix the ARM userspace build
+4a807bf qcacld-2.0: Dont include ext caps in Assoc request if AP doesn't support
+86d1e5a qcacld-2.0: Discard pktlog message for invalid msdu id
+9e5d2f7 qcacld-2.0: Fix stack corruption issue in sme_RrmProcessNeighborReport
+cdb25d0 qcacld-2.0: Fix compile errors when packet-log feature is disabled
+909f2a2 qcacld-2.0: Disable packet log feature
+5dde812 qcacld-2.0: Update to LA.HB.1.3.2-22100-8x96.0
+c7c873d qcacld-2.0: Increase multicast filter count
+8da24e0 qcacld-2.0: Fix set all-zero address mcast filter
+93bb265 qcacld-2.0: silence wakeup event log
+79b7059 staging: qcacld-2.0: disable log spilling message
+f489883 qcacld-2.0: Fix IPV6 IPA Rx property setting
+41cd84e qcacld-2.0: Update to release LA.HB.1.3.2-19000-8x96.0
+e366109 qcacld-2.0: Release LA.HB.1.3.2-16800-8x96.0
+7b53a4c Silences WLAN, PCIe, and CPU suspend state kernel messages
+499e3d9 qcacld-2.0: Chillax the spammy logging
+8566534 qcacld-2.0: Update to LA.HB.1.3.2-15400-8x96.0
+7ae87d8 qcacld-2.0: fix build warnings
+ba76ced Add qcacld-2.0 from LA.HB.1.3.1.c1-06100-8x96.0
+a957fd6 Synchronize codes to OxygenOS 3.2.6.
+d5e0e91 Fix standalone compiling
+5f9c936 Build: Stup build environment for Render Kernel
