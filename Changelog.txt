@@ -1,5 +1,87 @@
 Changelog For Render Kernel!!
 
+R3:
+ca5f12b (HEAD -> rk-oos-r3-t8-camera, rk-oos-r3-t7-mmc) mmc: core: Fix deadlock in suspend & rescan path
+90a8456 mmc: core: add deferred resume support
+2a9bb9d mmc: core: Remove flag MMC_PM_WAKE_SDIO_IRQ in mmc_resume_host
+38e04fc mmc: core: check if CQE is already disabled before halt/unhalt
+4582766 mmc: core: Fix the timing related checks in partial_init
+342b816 mmc: mmc: fix issue with clock scaling in HS200 mode
+6924f55 mmc: core: fix reading the bkops status from card
+8bf77cb mmc: mmc: Add clk_hold/release pair before caching host->ios
+23717cb drivers: mmc: fix issue raised by source code analyzer tool
+3faa0d2 mmc: core: modify scaling up/down sequence
+e24d0ff2 mmc: core: Add NULL check for host->card
+1a57468 mmc: core: fix deadlock between runtime-suspend and devfreq
+ecbfc28 mmc: block: Add quirk and increase read data timeout for hynix emmc
+e298c07 mmc: core: postpone runtime suspend in case BKOPS is required
+e206b31 mmc: core: update AUTO_EN in BKOPS_EN field on runtime resume
+3f6f11a mmc: revert runtime idle state
+b9d0523 mmc: host: Set max frequency when disabling clock scaling
+5cd2442 mmc: core: fix issue with devfreq clock scaling
+0ced3fa mmc: core: set REL_WR_SEC_C register to 0x1 per eMMC5.0 spec
+343db0d (origin/rk-oos-r3-t6-F2FS-SDCARDFS-CORECTL, rk-oos-r3-t6-F2FS-SDCARDFS-CORECTL) Defconfig: Enable CONFIG_IP_NF_MATCH_RPFILTER & CONFIG_IP6_NF_MATCH_RPFILTER
+0a7e7f3 qcacld-2.0: Fix hdd_ocb_config_new() signature
+a94ca2f qcacld-2.0: Fix VHT-80 IBSS stops beaconing
+870a689 qcacld-2.0: Don't Tag Non-WoW packets as Runtime PM packets after wow suspend
+f141c1f Defconfig: Re-Enable CONFIG_SCHED_CORE_CTL
+1703274 Defconfig: Update for F2FS
+4cd6f54 vfs: change d_canonical_path to take two paths
+9cb3550 (origin/rk-oos-r3-t4-sdcardfs, rk-oos-r3-t4-sdcardfs) sdcardfs: Added top to sdcardfs_inode_info
+16d8eee sdcardfs: Fix locking
+4951f30 ANDROID: sdcardfs: fix itnull.cocci warnings
+8616267 sdcardfs: Truncate packages_gid.list on overflow
+7e1f6a4 sdcardfs: Add support for parsing Android's package list
+22b918e sdcardfs: Check for other cases on path lookup
+733f718 sdcardfs: override umask on mkdir and create
+e290791 sdcardfs: reserve 20MB by default
+be85153 inotify: Fix erroneous update of bit count
+dfa9e0a vfs: add d_canonical_path for stacked filesystem support
+617385c VFS: Introduce inode-getting helpers for layered/unioned fs environments
+3aa4d26 fs: sdcardfs: build fix
+a66fea5 sdcardfs: remove unneeded __init and __exit
+6ac1108 sdcardfs: Remove unused code
+df80182 sdcardfs: remove effectless config option
+1862e09b sdcardfs: Add support for d_canonicalize
+6bdab6b sdcardfs: Bring up to date with Android M permissions:
+e26cbec Changed type-casting in packagelist management
+da3c05f Port of sdcardfs to 3.18
+685ec3d Included sdcardfs source code for kernel 3.0
+1cdcda4 Revert "fs: import sdcardfs from G930FXXU1APF2"
+bcf19a9 Revert "fs: fix sdcardfs compilation errors"
+570352d Revert "sdcardfs: merge version 3.2.0"
+baf219f Revert "sdcardfs: reserve 20MB by default"
+d5e53c1 Revert "sdcardfs: replace LOOKUP_CASE_INSENSITIVE"
+9f68b09 Revert "sdcardfs: override umask on mkdir and create"
+5eebabb ext4: iterate over buffer heads correctly in move_extent_per_page()
+dca10dd ext4: fix crashes in dioread_nolock mode
+eef4f65 ext4: don't read blocks from disk after extents being swapped
+aa48bc0 ext4: move_extent improve bh vanishing success factor
+789a668 ext4: fix potential integer overflow
+7b7d3a9 ext4, jbd2: ensure entering into panic after recording an error in superblock
+f3905de ext4: fix loss of delalloc extent info in ext4_zero_range()
+f8bef63 ext4: allocate entire range in zero range
+a95c20f ext4: don't manipulate recovery flag when freezing no-journal fs
+d4284c9 Defconfig: Enable CONFIG_CRYPTO_CRC32_ARM64
+3a31a12 Defconfig: Enable CONFIG_CRYPTO_SHA256_ARM
+58a46b5 crypto: arm/sha256 - Add optimized SHA-256/224
+adfce77 sched/core: Remove false-positive warning from wake_up_process()
+a80defd msm: thermal: Add sysfs nodes to control parameters
+e8dacd2 jbd2: fix incorrect unlock on j_list_lock
+a3b7f52 eCryptfs: fixed bug in cipher handling
+ab2d2f7 eCryptfs: fixes issue where files sometimes got corrupted upon close
+9e99770 fs:fuse: Disable shortcircuit when mmap is called on a file
+e1a6c39 mm + fs: extends support for cache dropping
+a36ac00 UPSTREAM: selinux: fix bug in conditional rules handling
+853d8e5 audit: fix a double fetch in audit_log_single_execve_arg()
+b09185b md: dm-req-crypt: fixed error propagation when ICE is used
+ead98c2 block: fix use-after-free in seq file
+fdcf7d0 block: fix use-after-free in sys_ioprio_get()
+e145412 blk-mq: fix buffer overflow when reading sysfs file of 'pending'
+40ed9c8 sd: Fix maximum I/O size for BLOCK_PC requests
+90f709d blkcg: fix gendisk reference leak in blkg_conf_prep()
+d57f8d1 ext4: fix potential use after free in __ext4_journal_stop
+
 R2:
 0e82102 (HEAD -> rk-oos-m, rk-oos-r2-t3)
 51131a7 Defconfig: Enable CONFIG_SCHED_HMP_CSTATE_AWARE
