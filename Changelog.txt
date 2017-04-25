@@ -1,5 +1,496 @@
 Changelog For Render Kernel!!
 
+R4:
+eb74457 (HEAD -> rk-los-n-eas-master, eas-1.2-testing-r1-t3-upstream) display: add a simple api to query the display state (on/off) at any point in time
+115b90e platform/msm: haptic: expose vibrate function
+b21eb98 wake_gestures: add s2w and dt2w
+31218f0 sweep2sleep: fix device name
+2da69bb sweep2sleep: don't create input device
+3580652 touch: sweep2sleep
+49e33191 power:qpnp-charger: extended charge time from 30s to 100s when battery status is near to full
+a04a65a Defconfig: Enable CONFIG_FORCE_FAST_CHARGE
+d88f643 drivers: misc: implement usb fast charge mode
+9167f11 drivers: wakeup: allow to request and count wakelocks with screen on.
+fb640c4 drivers: wakeup: allow 1 wakeup from IPA_WS every now and then
+205f775 drivers: wakeup: be more thorough with blocking wakelocks
+449d76f drivers: wakeup: it's pointless to output the active wakeup sources during screen on, no need to go through the rcu locks and list iterations every now and then
+accbcd8 drivers: wakeup: there's no much point in running the blockers during screen on
+4dc9a9e drivers: wakeup: run the wakelock blockers during wakeup_source activation and every resume
+702d18f drivers: wakeup: more thoroughly deactivation of wakelocks
+bc32a51 power: align wakeup_sources format
+f268a10 drivers: wakeup: add options to disable timerfd, netlink and wlan wakelocks
+1bca6b9 drivers: wakeup: bypass two WiFi wakelocks
+c7f882d power: wakeup: prevent IPA_WS wakelock from being acquired by default
+efd58d4 random: Remove kernel blocking API
+05efd27 random: Add callback API for random pool readiness
+7c7bbf5 random: Blocking API for accessing nonblocking_pool
+0af90d8 random: Wake up all getrandom(2) callers when pool is ready
+0b86fbd writeback: fix writeback cache thrashing
+e4540c4 adrenoboost: disable by default
+815cb66 adrenoboost: finetuning algorithm - scale it a bit down
+bb3abba msm_adreno_tz: add adrenoboost parameter
+5707165 Defconfig: Enable CONFIG_SOUND_CONTROL
+fa76e9b ASoC: wcd9335: prevent speaker gain from being reset
+04a96c7 sound_control: fix merge error
+de9eebd ASoC: wcd9335: add analog headphone gain
+03d4b5c ASoC: wcd9335: fix speaker gain controls
+81986e2 ASoC: wcd9335: add mic gain and speaker gain for OnePlus3
+5522dbe ASoC: wcd9335: Sound control
+75f0f63 tcp_cubic: do not set epoch_start in the future
+c3da1ff tcp_cubic: better follow cubic curve after idle period
+f909073 net: sch_generic: Allow devices to opt-out net watchdog
+583342f disable crc check
+92e7aac Defconfig: Enable CONFIG_FB_MSM_MDSS_KCAL_CTRL
+9a94797 msm: mdss: KCAL: disable igc update
+09f9094 msm: mdss: KCAL: Send a pp display commit when changes are made
+d386920 mdss mdp: kcal for mdss_mdp_v1_7
+abaacc2 msm: thermal: Add sysfs nodes to control parameters
+c63f42c PM / devfreq: Add a governor white list
+57a27a0 PM: devfreq: Fix simple_ondemand crashing on startup
+797bdc4 msm: kgsl: Report correct GPU frequency in sysfs
+878b36bc PM: devfreq: Use high priority workqueue
+7389d41 cfq-iosched: fix the setting of IOPS mode on SSDs
+6324ca1 block: Make CFQ default to IOPS mode on SSDs
+a381644 AIO: Don't plug the I/O queue in do_io_submit()
+c161c30 Defconfig: Update IOSCHEDS
+54449b8 block: add fifo scheduler
+d50a80d block: Maple.iosched: Fix Compiler Errors
+d2d6c53 block: maple: Stop abusing csd.list for fifo_time
+97454ac maple-iosched: Fix the -Wdeclaration-after-statement warnings
+fddd08a block: maple: Fix inverted logic
+67a87dec block: maple: Make bools constant across functions
+df210f9 block: maple: Use native display state instead of PowerSuspend
+4c203e5 block: maple: Serve asynchronous requests before synchronous ones
+0e982da block: maple: Fix some logic, import former/latter request logic from SIO, and use some improved bits of SIO
+f403c36 block: maple: Catch writes_starved sooner, increase limit.
+52d5980 block: maple: Clean up and add patchlevel macro to keep track of commits
+660d3f3 block: maple: Remove CONFIG_HZ dependency, assume 300 for interrupt frequency
+a778e0d block: [Introduded for 3.18.y] Add Maple I/O Scheduler
+4b120e4 zen-iosched: change fifo_batch to 16
+bcee4bd block: add zen scheduler
+568e5f2 SIO: update for linux 3.18
+3b00cad FIOPS: update for linux 3.18
+c727a1e Add SIO and FIOPS i/o schedulers
+9f350dd Added fsync on/off support.
+e6247fa mm: slub: Default slub_max_order to 0
+da82b7d mmc: move to a SCHED_FIFO thread
+9952e1e binfmt_elf.c: use get_random_int() to fix entropy depleting
+7ebc01f qdsp6v2: extend compilation with Os
+cbcdd2f sound: soc: optimize for size
+cef2d54 sound: msm: qdsp6v2: optimize for size
+8cf0075 asm-generic: atomic.h: relaxed atomic_read
+522b630 op3:tri_state_key: fix positions
+3a7b278 op3:tri_state_key: allow more key codes for extra modes
+718a282 tri_state_key: allow more key codes for extra modes
+62714b0 (origin/eas-1.2-testing-r1-t3-upstream) DTS: Update Energy Model for SD820 Devices (msm8996)
+410f197 Revert "cpuidle: Wakeup only cpus for which qos has changed."
+a1e3b52 cpuidle: Fix cpuidle_state_is_coupled() argument in cpuidle_enter()
+35b262b DTS: MSM8996: EAS Energy Model Change
+6c6f8f8 staging: binder - Set binder_debug_mask=0 to suppress logging
+6c23c49 android: binder: Disable preemption while holding the global binder lock.
+e2d8eb5 CHROMIUM: android: binder: Fix potential scheduling-while-atomic
+ad80dd5 Defconfig: Update & Cleanup for EAS
+fd498f2 Revert "memcg: add permission check"
+8caa767 Revert "cgroup: memcg: pass correct argument to subsys_cgroup_allow_attach"
+57841c4 cgroup: Change from CAP_SYS_NICE to CAP_SYS_RESOURCE for cgroup migration permissions
+61572c5 CHROMIUM: cgroups: relax permissions on moving tasks between cgroups
+cf5cc18 ANDROID: sched/tune: Remove leftover instances of allow_attach
+9f56add Revert "cgroup: refactor allow_attach function into common code"
+b1fc655 Revert "cgroup: Add generic cgroup subsystem permission checks"
+4040500 Revert "cgroup: Clean up after allow_attach check"
+c13403a cpuset: make sure new tasks conform to the current config of the cpuset
+ae87216 Revert "cpuset: Add allow_attach hook for cpusets on android."
+bc8826b cpuset: handle race between CPU hotplug and cpuset_hotplug_work
+cadddfb SCHED: SCHEDUTIL: Fix tunables not sticking after core going offline
+e72c372 Defconfig: Enable RCU_BOOST Enable RCU boost to avoid risk of priority-inversion and memory leaks when readers are preempted.
+b3160d0 Build: Update Linaro TC to 6.3.1 022017
+84ce8fe Build: Update build script
+ebf31f9 Build: Update AnyKernel path
+b2adb12 sched: EAS: energy model change. Based on QCOM 8996AB one.
+a5dc4d8 Fixes for GCC 6+ warnings and several errors
+a2d491d kbuild: move -Wunused-const-variable to W=1 warning level
+41c9853 arm64/boot/Makefile: Make sure find command follows symbolic links to find the dtb
+27ec96d vvv Google-EAS-r1.2 Stops Here vvv
+8788e28 FROM-LIST: cpufreq: schedutil: Redefine the rate_limit_us tunable
+1549976 sched: Implement lockless wake-queues
+4e4c253 UPSTREAM: sched/fair: Fix post_init_entity_util_avg() serialization
+bd4f34f ANDROID: sched: fix duplicate sched_group_energy const specifiers
+3496026 EXPERIMENTAL: sched/fair: Use energy_diff for tasks where appropriate
+41739e5 EXPERIMENTAL: sched/fair: Reduce balance interval to 0 if we have a misfit task
+264fe6a EXPERIMENTAL: events: add tracpoint for energy/performance variations
+c2b99a9 EXPERIMENTAL: events: add tracepoint for energy_diff
+959cca9 EXPERIMENTAL: sched/fair: add support to compute perf/energy variations
+de2922e EXPERIMENTAL: sched/fair: make find_new_capacity() to honour the task's boost
+954b20b EXPERIMENTAL: sched/fair: use energy_env as single argument
+98b3745 EXPERIMENTAL: sched/fair: add ENERGY_FILTER sched_feature
+cc27f68a EXPERIMENTAL: FROMLIST: sched/fair: kick nohz idle balance for misfit task
+bbd25c1 sched/tune: don't use schedtune before it is ready
+3918763 sched/fair: use SCHED_CAPACITY_SCALE for energy normalization
+982289e sched/{fair,tune}: use reciprocal_value to compute boost margin
+1367a37 sched/tune: Initialize raw_spin_lock in boosted_groups
+eb39ba0 sched/tune: report when SchedTune has not been initialized
+5b7c5ed sched/tune: fix sched_energy_diff tracepoint
+8fa0131 sched/tune: increase group count to 5
+9665ef7 cpufreq/schedutil: use boosted_cpu_util for PELT to match WALT
+a839800 sched/fair: Fix sched_group_energy() to support per-cpu capacity states
+a92f703 sched/fair: discount task contribution to find CPU with lowest utilization
+2addebe cpufreq/schedutil: Fix schedutil's 'default governor' machinery
+728eaed sched/fair: ensure utilization signals are synchronized before use
+501e050 sched/walt: Add CONFIG_USE_WALT to change default usage of WALT
+1bfc747 sched/fair: remove task util from own cpu when placing waking task
+fa5c0de trace:sched: Make util_avg in load_avg trace reflect PELT/WALT as used
+4c7d575 Experimental!: sched/fair: Add eas (& cas) specific rq, sd and task stats
+82313a1 sched/core: Fix PELT jump to max OPP upon util increase
+e1a442d sched: EAS: energy model change
+9ddace8 perf: protect group_leader from races that cause ctx double-free
+a89db5f DEBUG: sched/fair: Fix sched_load_avg_cpu events for task_groups
+266ef65 DEBUG: sched/fair: Fix missing sched_load_avg_cpu events
+40d8f7c Revert "cgroup: Fix issues in allow_attach callback"
+b248b176 ANDROID: sched/walt: fix build failure if FAIR_GROUP_SCHED=n
+894320b sched/walt: kill {min,max}_capacity
+e7a271c sched: EAS & 'single cpu per cluster'/cpu hotplug interoperability
+2a0a66f sched: Multiple upstream load tracking changes
+2825fb8 sched/fair: Fix effective_load() to consistently use smoothed load
+40b08bb sched: propagate asynchrous detach
+ef10471 sched: propagate load during synchronous attach/detach
+c15b168 sched: fix hierarchical order in rq->leaf_cfs_rq_list
+212d650 sched: factorize PELT update
+ee7c599 sched: factorize attach entity
+4775c4d sched/fair: Improve PELT stuff some more
+5b2282a sched/fair: Apply more PELT fixes
+74084f9 sched/fair: Initiate a new task's util avg to a bounded value
+18ace01 Fixup!: sched/fair: No need to 'and' current cpu w/ online mask in wakeup
+5b827a9b Fixup!: Return first idle cpu for prefer_idle task immediately
+1aa9d58 Fixup!: sched/fair: Simplify idle_idx handling in select_idle_sibling()
+3e2792b Fixup!: sched/fair: Refactor min_util, new_util in find_best_target()
+9ec0de7 Fixup!: sched/fair: Simplify idle_idx handling in find_best_target()
+08c006d1 Fixup!: sched/fair: Simplify target_util handling in find_best_target()
+5a7ab5c sched/fair: Simplify backup_capacity handling in find_best_target()
+7deb9bf Experimental!: sched/fair: Change cpu iteration order in find_best_target()
+c9c2bff Experimental!: sched/core: Add first cpu w/ max/min orig capacity to root domain
+9507101 sched/core: Remove remnants of commit fd5c98da1a42
+1176f1d Experimental!: sched: Remove sysctl_sched_is_big_little
+24e3769 Experimental!: sched/fair: Code !is_big_little path into select_energy_cpu_brute()
+225edd7 Experimental!: EAS: sched/fair: Re-integrate 'honor sync wakeups' into wakeup path
+892b1f8 Fixup!: sched/fair.c: Set SchedTune specific struct energy_env.task
+a317801 Experimental!: sched/fair: Energy-aware wake-up task placement
+b928404 Experimental!: sched/fair: Add energy_diff dead-zone margin
+5127f13 Experimental!: sched/fair: Decommission energy_aware_wake_cpu()
+4e15549 Experimental!: sched/fair: Do not force want_affine eq. true if EAS is enabled
+38f228b sched/fair: Fix incorrect comment for capacity_margin
+1fc7030 sched/fair: Avoid pulling tasks from non-overloaded higher capacity groups
+25fc616 sched/fair: Add per-CPU min capacity to sched_group_capacity
+4b2954e sched/fair: Consider spare capacity in find_idlest_group()
+46487b9 sched/fair: Compute task/cpu utilization at wake-up correctly
+937b246 sched/fair: Let asymmetric CPU configurations balance at wake-up
+f694e54f sched/core: Enable SD_BALANCE_WAKE for asymmetric capacity systems
+ac9043f sched/core: Pass child domain into sd_init()
+84908e3 sched/core: Introduce SD_ASYM_CPUCAPACITY sched_domain topology flag
+93f9cac sched/core: Remove unnecessary NULL-pointer check
+ac7e87d sched/fair: Optimize find_idlest_cpu() when there is no choice
+34afdcc sched/fair: Make the use of prev_cpu consistent in the wakeup path
+ec7cbc8 sched/core: Fix power to capacity renaming in comment
+4cd0c42 Partial Revert: "WIP: sched: Add cpu capacity awareness to wakeup balancing"
+4d090b1 Revert "WIP: sched: Consider spare cpu capacity at task wake-up"
+1121eb6 Defconfig: Enable CONFIG_CPU_FREQ_GOV_SCHEDUTIL
+37f4535 schedutil: Fix linkage of schedutil and walt
+046111c cpufreq: schedutil: add up/down frequency transition rate limits
+7d1e2ec trace/sched: add rq utilization signal for WALT
+1f82b15 sched/cpufreq: make schedutil use WALT signal
+62df137 sched: cpufreq: use rt_avg as estimate of required RT CPU capacity
+f1996f1 cpufreq: schedutil: move slow path from workqueue to SCHED_FIFO task
+73adc2a sched: backport schedutil governor from 4.9-rc4
+a23c8bf sched: backport cpufreq hooks from 4.9-rc4
+16ad842 kthread: allow to cancel kthread work
+d7aa202 sched/cpufreq: fix tunables for schedfreq governor
+1f94fdc sched: This kernel expects sched_cfs_boost to be signed
+feb0f9d Revert "DEBUG: UTIL_EST: sched: update tracepoint to report estimated CPU utilzation"
+70d53be sched/walt: Drop arch-specific timer access
+1429d86 sched/tune: backport 'fix accounting for runnable tasks'
+3366f3f sched: Fix sysctl_sched_cfs_boost type to be int
+34dbc3f sched/walt: use do_div instead of division operator
+a753e9d schedtune: Guarding against compile errors
+fd4f642 Unify whitespace layout with android-3.18
+aec2c21 Revert: UTIL_EST code from 'fix set_cfs_cpu_capacity when WALT is in use"
+c279139 sched/fair: Fix uninitialised variable in idle_balance
+4983f35 sched/fair: missing parts of 'optimize idle cpu selection for boosted tasks'
+691b05b eas/sched/fair: Fixing comments in find_best_target.
+8a3be15 FIX: sched/tune: move schedtune_nornalize_energy into fair.c
+eb8ef77 FIXUP: sched/tune: update accouting before CPU capacity
+6370dff Revert "WIP: UTIL_EST: sched/fair: add support for estimated utilization"
+b38ac24 Revert "WIP: UTIL_EST: sched/{core,fair}: add support to use estimated utilization"
+0d93dad sched: revert UTIL_EST usage from commit 6bf72ca7f1
+dc8c8e5 Revert "WIP: UTIL_EST: switch to usage of tasks's estimated utilization"
+99a0c50 Revert "WIP: UTIL_EST: sched/fair: use estimated utilization to drive CPUFreq"
+4ce4c29 Revert "WIP: UTIL_EST: use estimated utilization on energy aware wakeup path"
+abd23f0 Revert "WIP: UTIL_EST: use estimated utilization on load balancing paths"
+1ee431c sched: tune: Fix lacking spinlock initialization
+0a4e6d2 ANDROID: sched/tune: schedtune_allow_attach() can be static
+7d694bd ANDROID: sched/tune: __pcpu_scope_cpu_boost_groups can be static
+f27b323 ^^^ Google-EAS-r1.2 Starts Here ^^^
+4602ee7 vvv Google-MR1-EAS Stops Here vvv
+f68883f UPSTREAM: rcu: Improve diagnostics for spurious RCU CPU stall warnings
+a39a7e6 sched: avoid migrating when softint on tgt cpu should be short
+47c0577 sched/fair: remove printk while schedule is in progress
+bd73839 sched: avoid scheduling RT threads on cores currently handling softirqs
+18ddbfd UPSTREAM: genirq: Add flag to force mask in disable_irq[_nosync]()
+a550a7e sched/cpufreq_sched: fix thermal capping events
+b209b8b Defconfig: Disable CONFIG_BUS_AUTO_SUSPEND
+66cacbd UPSTREAM: sched/preempt: Fix preempt_count manipulations
+f71d253 eas/sched/fair: Picking cpus with low OPPs for tasks that prefer idle CPUs
+2ec264b FIXUP: sched/tune: do initialization as a postcore_initicall
+472151f sched/fair/eas: Favor higher cpus only for boosted tasks.
+187de1d WIP sched/tune: Introducing a new schedtune attribute prefer_idle.
+1a516bc WIP: arm64: reapply lost linkage between cpu capacity and freq caps
+0ccfd19 sched: eas: use util instead of capacity to select busy cpu
+3b8e376 arch_timer: add error handling when the MPM global timer is cleared
+7109596 sched/rt: Avoid moving rt task if destination CPU does not run low priority task.
+c59b6ed sched: EAS: fix select_idle_sibling
+4a5c072 Revert "mm: swap: swap ratio support"
+62e16f2 sched/tune: fix PB and PC cuts indexes definition
+59c9fe8 eas/stune: schedtune cpu boost_max must be non-negative.
+eef3937 sched: fix set_cfs_cpu_capacity when WALT is in use sched: fix SchedFreq integration for both PELT and WALT
+68ae4af timekeeping: add error handling when cntvct_el0 becomes 0
+b24e9da Revert "sched: fix set_cfs_cpu_capacity when WALT is in use"
+247de41 sched: eas: optimize idle cpu selection for boosted tasks
+18c314d sched: fix SchedFreq integration for both PELT and WALT
+9fc4e8e sched: fix set_cfs_cpu_capacity when WALT is in use
+363e449 sched: EAS: Avoid causing spikes to max-freq unnecessarily
+bd2c81a sched: eas: fix corner case in optimization for boosted tasks
+a9c4742 eas/sched/fair: Favoring busy cpus with low OPPs
+50f818e eas: favor idle cpus for boosted tasks
+797a72c Defconfig: Update for EAS
+6c1be1f Fixing compilation errors in cpufreq_interactive.c due to EAS merge on to the default android-msm-marlin-3.18.
+9276104 eas/walt: Use walt_ktime_clock() instead of ktime_get_ns() to avoid a race resulting in watchdog resets
+a289e0a eas/walt: Accounting for number of irqs pending on each core.
+b604211 sched: EAS: Fix double-release of spinlock in move_queued_task
+6f737f6 EAS: fix build for non-SMP targets
+83a7f7e Handle walt accounting anomoly during resume
+9d998b2 Fix hang during suspend in sched_group_energy
+0c79b07 Fixing compilation errors in fair.c and core.c due to merging EAS patches into mainline android-msm-marlin-3.18.
+8621f61 sched/tune: fix accounting for runnable tasks (5/5)
+55ea6c7 sched/tune: fix accounting for runnable tasks (4/5)
+3194f8e sched/tune: fix accounting for runnable tasks (3/5)
+3555efc sched/tune: fix accounting for runnable tasks (2/5)
+0353e91 sched/tune: fix accounting for runnable tasks (1/5)
+c723a5e sched/tune: beautify schedtune_tasks_update()
+3f75244 sched/tune: use a single initialisation function
+76a9fa3 sched/{fair,tune}: simplify fair.c code
+9e86c38 sched/tune: fix compilation error on !CONFIG_CGROUP_SCHEDTUNE
+7908d2d sched/tune: fix payoff calculation for boost region
+5eeaf9d sched: Introduce Window Assisted Load Tracking (WALT)
+71814fa sched/fair: call OPP update when going idle after migration
+7b3ab43 sched-freq: make throttle times tunable
+e49d1a7 sched/cpufreq: Increasing throttle_down_nsec to 50ms
+387d9e5 eas: New energy model for QCOM 8996AB
+ed02376 sched/fair: Moving boosted_task_util outside the loop.
+1427f9c sched/fair: Using boosted_task_util to calculate new_util in energy_aware_wake_cpu.
+5d4fc25 schedtune: Add support for negative boost values
+85c2d23 sched: EAS: take cstate into account when selecting idle core
+a2e7dde FIX: STUNE: update usage of boosted task utilisation on CPU selection
+d4830b8 FIX: STUNE: move schedtune_nornalize_energy into fair.c
+55cff07 DEBUG: UTIL_EST: sched: update tracepoint to report estimated CPU utilzation
+cf4f462 WIP: UTIL_EST: use estimated utilization on load balancing paths
+4130bbf WIP: UTIL_EST: use estimated utilization on energy aware wakeup path
+605a354 WIP: UTIL_EST: sched/fair: use estimated utilization to drive CPUFreq
+6fe8f86 WIP: UTIL_EST: switch to usage of tasks's estimated utilization
+b8a6606 WIP: UTIL_EST: sched/{core,fair}: add support to use estimated utilization
+38f9b62 WIP: UTIL_EST: sched/fair: add support for estimated utilization
+f8a5dc2 UPSTREAM: sched/fair: Make the entity load aging on attaching tunable
+b019b30 UPSTREAM: sched/fair: Fix new task's load avg removed from source CPU in wake_up_new_task()
+79cc5d5 UPSTREAM: sched/fair: Disable the task group load_avg update for the root_task_group
+9f9c736 UPSTREAM: sched/fair: Move the cache-hot 'load_avg' variable into its own cacheline
+38a9967 UPSTREAM: sched/fair: Avoid redundant idle_cpu() call in update_sg_lb_stats()
+c3b0ce9 UPSTREAM: sched/fair: Make it possible to account fair load avg consistently
+5450a72 UPSTREAM: sched/fair: Modify the comment about lock assumptions in migrate_task_rq_fair()
+40be934 UPSTREAM: sched/fair: Clean up the explanation around decaying load update misses
+9a7e144 UPSTREAM: sched/fair: Fix nohz.next_balance update
+b091d65 UPSTREAM: sched/core: Delete PF_EXITING checks from cpu_cgroup_exit() callback
+89628b0 UPSTREAM: sched/core: Remove unused argument from sched_class::task_move_group
+96feee8 UPSTREAM: sched/fair: Unify switched_{from,to}_fair() and task_move_group_fair()
+f19bba0 UPSTREAM: sched/fair: Fix switched_to_fair()'s per entity load tracking
+d69c86a UPSTREAM: sched/fair: Have task_move_group_fair() unconditionally add the entity load to the runqueue
+121ab93 UPSTREAM: sched/fair: Factor out the {at,de}taching of the per entity load {to,from} the runqueue
+d07bbcb UPSTREAM: sched: Ensure a task has a non-normalized vruntime when returning back to CFS
+3258e6c UPSTREAM: sched/fair: Clean up the __sched_period() code
+bea883a UPSTREAM: sched/core: Validate rq_clock*() serialization
+5ca2a43 sched: fair: add tunable to set initial task load
+a6aef73 sched-freq: Fix handling of max/min frequency
+80b7515 TBT: EXPERIMENTAL: sched/fair: recalculate PELT lookup tables for 16ms
+53ce633 DEBUG: sched: add tracepoint for RD overutilized
+76b91382 EAS: sched: fair: fix uninitialized local variable
+837a62a sched/cpufreq_sched: use shorter throttle for raising OPP
+1c12894 EAS: cpufreq: interactive: return ENODEV on write to use_migration_notif
+fef0423 EAS: sched/fair: for SMP bias toward idle core with capacity
+22936b4 EAS: sched/fair: tunable to honor sync wakeups
+0754bc3 EAS: sched/fair: tunable to force selecting at cpu granularity
+18d2491 Add energy model for mtp8996
+0653555 WIP: arm64, topology: Updates to use DT bindings for EAS costing data
+b15f1ca FIXUP: arm64: Remove Juno specific changes to topology.c
+afba0cc WIP: arm64: Cpu invariant scheduler load-tracking and capacity support
+b40526c WIP: arm64, topology: Define JUNO energy and provide it to the scheduler
+2728abe WIP: sched: Documentation for scheduler energy cost model
+fe46c6dd FROMLIST: cpufreq: introduce cpufreq_driver_is_slow
+edf0613 WIP: cpufreq: Max freq invariant scheduler load-tracking and cpu capacity support
+e109263 UPSTREAM: cpumask, nodemask: implement cpumask/nodemask_pr_args()
+0d89040 WIP: cpufreq: Frequency invariant scheduler load-tracking support
+2224d43 WIP: arm64: Enable max freq invariant scheduler load-tracking and capacity support
+e475d03 WIP: Documentation: DT bindings for energy model cost data required by EAS
+8f9ad25 WIP: arm: Update arch_scale_cpu_capacity() to reflect change to define
+dbefba9 WIP: arm: Enable frequency invariant scheduler load-tracking support
+fbd006e WIP: arm: topology: Define TC2 energy and provide it to the scheduler
+1c72f8b WIP: arm: Cpu invariant scheduler load-tracking and capacity support
+db437b0 CHROMIUM: cpufreq: Declare acct_update_power as static inline if needed
+338b23f WIP: arm: Enable max freq invariant scheduler load-tracking and capacity support
+f7930d9 WIP: arm64: Enable frequency invariant scheduler load-tracking support
+7a5f467 WIP: sched/tune: add detailed documentation
+1419e35 DEBUG: schedtune: add tracepoint on P-E space filtering
+e5b7f9c DEBUG: schedtune: add tracepoint for energy_diff() values
+c61010b DEBUG: schedtune: add tracepoint for task boost signal
+fc865b6 DEBUG: schedtune: add tracepoint on boostgroup updates
+5e5f847 DEBUG: schedtune: add tracepoint for schedtune_tasks_update() values
+8946c8f DEBUG: schedtune: add tracepoint for CPU boost signal
+ba2b1db DEBUG: schedtune: add tracepoint for SchedTune configuration update
+6556fca DEBUG: sched: add energy procfs interface
+1757385 DEBUG: sched,cpufreq: add cpu_capacity change tracepoint
+b3a18bb DEBUG: sched: add tracepoint for CPU load/util signals
+3e72907 DEBUG: sched: add tracepoint for task load/util signals
+a184575 DEBUG: sched: add tracepoint for cpu/freq scale invariance
+dacc880 WIP: sched/fair: filter energy_diff() based on energy_payoff value
+79c5cc7 WIP: sched/tune: add support to compute normalized energy
+0fedb44 WIP: sched/fair: keep track of energy/capacity variations
+312fe3d WIP: sched/fair: add boosted task utilization
+fbf0d16 WIP: sched/{fair,tune}: track RUNNABLE tasks impact on per CPU boost value
+f6befcb WIP: sched/tune: compute and keep track of per CPU boost value
+7220f09 WIP: sched/tune: add initial support for CGroups based boosting
+0134510 WIP: sched/fair: add boosted CPU usage
+2990041ea WIP: sched/fair: add function to convert boost value into "margin"
+fbf4f26 WIP: sched/tune: add sysctl interface to define a boost value
+465cb38 WIP: sched/cpufreq_sched: add trace events
+d66012f FIXUP: sched/fair: jump to max OPP when crossing UP threshold
+070bf59 FIXUP: FROMLIST: sched: scheduler-driven cpu frequency selection
+958c020 FIXUP: sched: scheduler-driven cpu frequency selection
+31bffdd FROMLIST: sched: rt scheduler sets capacity requirement
+0698e80 FROMLIST: sched: deadline: use deadline bandwidth in scale_rt_capacity
+c2d76f8 FROMLIST: sched: remove call of sched_avg_update from sched_rt_avg_update
+c89a30e FROMLIST: sched/fair: jump to max OPP when crossing UP threshold
+397c839 FROMLIST: sched/fair: cpufreq_sched triggers for load balancing
+821906f FROMLIST: sched/{core,fair}: trigger OPP change request on fork()
+f9c1b29 FROMLIST: sched/fair: add triggers for OPP change requests
+4881baf FROMLIST: sched: scheduler-driven cpu frequency selection
+6b68735 CHROMIUM: Enable ENERGY_AWARE sched feature
+3b4cb45 WIP: sched: Support for extracting EAS energy costs from DT
+9cd3569 WIP: sched: Consider misfit tasks when load-balancing
+358d458 WIP: sched: Add group_misfit_task load-balance type
+ab37152 WIP: sched: Add per-cpu max capacity to sched_group_capacity
+5cb2952 WIP: sched: Do eas idle balance regardless of the rq avg idle value
+5b605ab WIP: sched: Update max cpu capacity in case of max frequency constraints
+9f18368 WIP: sched: Disable energy-unfriendly nohz kicks
+beafda7 WIP: sched: Consider a not over-utilized energy-aware system as balanced
+8a34de9 WIP: sched: Energy-aware wake-up task placement
+26f9713 WIP: sched: Determine the current sched_group idle-state
+6168a55 WIP: sched, cpuidle: Track cpuidle state index in the scheduler
+b676ab4 WIP: sched: Add over-utilization/tipping point indicator
+27ad8e0 WIP: sched: Estimate energy impact of scheduling decisions
+5c0554b WIP: sched: Extend sched_group_energy to test load-balancing decisions
+6e53173 WIP: sched: Calculate energy consumption of sched_group
+fb9d656 WIP: sched: Highest energy aware balancing sched_domain level pointer
+886c5ee WIP: sched: Relocated cpu_util() and change return type
+db2e333 FROMLIST: sched: Compute cpu capacity available at current frequency
+ff82d9c WIP: sched: Introduce SD_SHARE_CAP_STATES sched_domain flag
+a03493d WIP: sched: Initialize energy data structures
+0bdc50a WIP: sched: Introduce energy data structures
+c310a4f WIP: sched: Make energy awareness a sched feature
+fb22df1 WIP: sched: Prevent unnecessary active balance of single task in sched group
+15afdda WIP: sched: Enable idle balance to pull single task towards cpu with higher capacity
+7a19a90 WIP: sched: Consider spare cpu capacity at task wake-up
+f78c352 WIP: sched: Add cpu capacity awareness to wakeup balancing
+88fd2a3 WIP: sched: Store system-wide maximum cpu capacity in root domain
+c3cecc4 BACKPORT: sched: Fix cpu_active_mask/cpu_online_mask race
+690561e UPSTREAM: sched: Fix a race between __kthread_bind() and sched_setaffinity()
+a91118e UPSTREAM: sched/fair: Beef up wake_wide()
+b42a451 UPSTREAM: sched: Move code around
+7bfb315 UPSTREAM: sched/core: Remove check of p->sched_class
+6de7cbe UPSTREAM: sched,dl: Fix sched class hopping CBS hole
+e61679e UPSTREAM: sched: deadline: Use hrtimer_start()
+c4b90aa UPSTREAM: sched/deadline: Support DL task migration during CPU hotplug
+5e4adb8 UPSTREAM: sched/dl: Prevent enqueue of a sleeping task in dl_task_timer()
+977080f UPSTREAM: sched/deadline: Fix stale yield state
+3e3a471 UPSTREAM: sched/deadline: Fix deadline parameter modification handling
+54020eb UPSTREAM: sched/deadline: Don't check CONFIG_SMP in switched_from_dl()
+ecf78b0 UPSTREAM: sched/deadline: Reschedule from switched_from_dl() after a successful pull
+540a93a UPSTREAM: sched/deadline: Fix artificial overrun introduced by yield_task_dl()
+729ac2b UPSTREAM: sched/deadline: Implement cancel_dl_timer() to use in switched_from_dl()
+e27d3e7 UPSTREAM: sched/fair: Update task group's load_avg after task migration
+05060d6 UPSTREAM: sched/fair: Fix overly small weight for interactive group entities
+afdc4b1 UPSTREAM: sched/fair: Optimize per entity utilization tracking
+6c6c17e UPSTREAM: sched/fair: Defer calling scaling functions
+95742b8 UPSTREAM: sched/fair: Optimize __update_load_avg()
+bbd8415 UPSTREAM: sched/fair: Rename scale() to cap_scale()
+34dae20 UPSTREAM: sched/fair: Initialize task load and utilization before placing task on rq
+1671605 UPSTREAM: sched/fair: Get rid of scaling utilization by capacity_orig
+e0abbc0 UPSTREAM: sched/fair: Name utilization related data and functions consistently
+9092edd UPSTREAM: sched/fair: Make utilization tracking CPU scale-invariant
+aa74d2b UPSTREAM: sched/fair: Convert arch_scale_cpu_capacity() from weak function to #define
+3da48b7 UPSTREAM: sched/fair: Make load tracking frequency scale-invariant
+97cd5cc UPSTREAM: sched/fair: Clean up load average references
+28469ec UPSTREAM: sched/fair: Provide runnable_load_avg back to cfs_rq
+fb1318d UPSTREAM: sched/fair: Remove task and group entity load when they are dead
+cad164d UPSTREAM: sched/fair: Init cfs_rq's sched_entity load average
+4922bb2 UPSTREAM: sched/fair: Implement update_blocked_averages() for CONFIG_FAIR_GROUP_SCHED=n
+da2c069 UPSTREAM: sched/fair: Rewrite runnable load and utilization average tracking
+22191bd UPSTREAM: sched/fair: Remove rq's runnable avg
+3e20dc5 UPSTREAM: sched, timer: Convert usages of ACCESS_ONCE() in the scheduler to READ_ONCE()/WRITE_ONCE()
+0a87dc1 UPSTREAM: sched/core: Validate rq_clock*() serialization
+8f03a9d UPSTREAM: sched: Move the loadavg code to a more obvious location
+aaff54f UPSTREAM: sched/fair: Fix a comment reflecting function name change
+8593cd5 UPSTREAM: sched/fair: Fix sched_entity::avg::decay_count initialization
+d559856 UPSTREAM: sched/fair: Avoid pulling all tasks in idle balancing
+96f78c7 UPSTREAM: cpuidle: Clean up fallback handling in cpuidle_idle_call()
+2d865c6 UPSTREAM: PM / sleep: Re-implement suspend-to-idle handling
+5a169f5 UPSTREAM: sched: Improve load balancing in the presence of idle CPUs
+86cec81 UPSTREAM: sched: Optimize freq invariant accounting
+2ea9ea6 Remove qhmp_rt.c from EAS branch
+156b922 UPSTREAM: sched: Move CFS tasks to CPUs with higher capacity
+bfef2d2 UPSTREAM: sched: Add SD_PREFER_SIBLING for SMT level
+47a0a08 UPSTREAM: sched: Remove unused struct sched_group_capacity::capacity_orig
+8a819ab UPSTREAM: sched: Replace capacity_factor by usage
+7c3ce91 UPSTREAM: sched: Calculate CPU's usage statistic and put it into struct sg_lb_stats::group_usage
+68cb7ac UPSTREAM: sched: Add struct rq::cpu_capacity_orig
+6ac85dd UPSTREAM: sched: Make scale_rt invariant with frequency
+8bda30b UPSTREAM: sched: Make sched entity usage tracking scale-invariant
+2d8c2a3 UPSTREAM: sched: Remove frequency scaling from cpu_capacity
+11f5c94 UPSTREAM: sched: Track group sched_entity usage contributions
+b518a1c UPSTREAM: sched: Add sched_avg::utilization_avg_contrib
+b46ff6e UPSTREAM: sched/fair: fix use stale overloaded status in the busiest group finding logic
+f11a4a9 UPSTREAM: sched/fair: Fix the dealing with decay_count in __synchronize_entity_decay()
+a5ef960 sched: Revert HMP and some MSM specific features
+6ff14ef ^^^ Google-MR1-EAS Starts Here ^^^
+b61dd15 Revert "Merge remote-tracking branch '318/dev/msm-3.18-sched' into msm318"
+c69325a Revert "sched: Introduce sched_freq_aggregate_threshold tunable"
+21cc09a Revert "trace: Move core control trace events to scheduler"
+f8ccfb7 Revert "core_ctrl: Move core control into kernel"
+99ee0a4 Revert "sched: Add a knob to disable the core_ctl"
+050bda5 Revert "Merge "sched: panic on corrupted stack end""
+88f748c Revert "sched: Fix cpu_active_mask/cpu_online_mask race"
+ac02159 Revert "sched: panic on corrupted stack end"
+a002da9 Revert "sched: qhmp_core: Fix possible hotplug race in set_cpus_allowed_ptr"
+b19d400 Revert "Merge "net: ping: Fix stack buffer overflow in ping_common_sendmsg()""
+a8c81fd Revert "sched: drop related_thread_group_lock before calling call_rcu()"
+86a8879 Revert "sched: Fix deadlock between cpu hotplug and upmigrate change"
+6a14c45 Revert "arm64: Modify support for 32bit app specfic settings"
+8a1e585 Revert "sched: Fix integer overflow in sched_update_nr_prod()"
+a547751 staging: qcacld-2.0: build with default options
+8afb7b1 arch: Unbreak mrproper/clean
+b189ed6 arm64: Fix the ARM userspace build
+1ff1d04 proc: Remove verifiedbootstate flag from /proc/cmdline
+c8e3b6a Build: Fix Build Errors
+b041270 build standalone (Edited)
+28a872b Fix standalone compiling
+38758c5 Makefile: Optimize
+a2cf498 Build: Get ready for Render Kernel!
+
+
 R1:
 30607df (HEAD -> rk-oos-n, rk-oos-n-r1-t2) Update gitignore
 32c9a24 Defconfig: Enable CONFIG_FORCE_FAST_CHARGE
