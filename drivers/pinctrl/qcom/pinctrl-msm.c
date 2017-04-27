@@ -870,12 +870,7 @@ static void msm_gpio_irq_handler(unsigned int irq, struct irq_desc *desc)
                             need_show_pinctrl_irq = false;
                             printk(KERN_ERR "hwirq %s [irq_num=%d ]triggered\n",irq_to_desc(irq_pin)->action->name,irq_pin);
 							log_wakeup_reason(irq_pin);
-							if(strstr(irq_to_desc(irq_pin)->action->name, "soc:fpc_fpc1020") != NULL) //fpc_fpc1020
-							{
-								sched_set_boost(1);
-							}
-                        }
-                        //--
+						}
 		}
 	}
 
